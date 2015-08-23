@@ -8,14 +8,6 @@ var server = net.createServer(function(socket) { //'connection' listener
 
     var statusLine = 'HTTP/1.1 200 OK' + '\n';
 
-    var responseHeader = function (serverName) {
-
-      var date = new Date();
-      var UTCString = date.toUTCString();
-
-      return 'server:' + serverName + '\n' + 'date:' + UTCString + '\n' + '\n' ;
-
-    };
 
     var header = responseHeader('tengaServer');
 
@@ -27,16 +19,23 @@ var server = net.createServer(function(socket) { //'connection' listener
 
 
     switch (path) {
-      case '/': socket.write(index); break;
+      case '/':
       case '/index': socket.write(index); break;
       case '/hydrogen': socket.write(hydrogen); break;
       case '/helium': socket.write(helium); break;
       case '/css/styles.css': socket.write(styles); break;
-      default: socket.write(notFound); break;
+      default: socket.write(notFound);
     }
     socket.end();
   });
 
+function responseHeader (serverName) {
+
+  var date = new Date();
+  var UTCString = date.toUTCString();
+
+  return 'server:' + serverName + '\n' + 'date:' + UTCString + '\n' + '\n' ;
+}
 
 
 
