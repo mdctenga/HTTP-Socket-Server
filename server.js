@@ -3,8 +3,8 @@ var server = net.createServer(function(socket) { //'connection' listener
   console.log('client connected');
 
   socket.on('data', function(chunk) {
+    console.log(chunk.toString());
     var path = chunk.toString().split(" ")[1];
-    console.log(path);
 
     var statusLine = 'HTTP/1.1 200 OK' + '\n';
 
